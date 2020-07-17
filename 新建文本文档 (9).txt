@@ -1,0 +1,889 @@
+	{isNotBlank(location) && isNotBlank(location.query) && isNotBlank(location.query.ids) && isNotBlank(cpCarloadConstructionFormGet)&& isNotBlank(cpCarloadConstructionFormGet.status)&& cpCarloadConstructionFormGet.status ==0  &&
+						<span>
+							<Card title="基本信息" bordered={false}>
+								<Row gutter={16}>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='订单状态'>
+											<Input disabled
+												value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.orderStatus) ? (
+													cpCarloadConstructionFormGet.orderStatus === 0 || cpCarloadConstructionFormGet.orderStatus === '0' ? '未处理' : (
+														cpCarloadConstructionFormGet.orderStatus === 1 || cpCarloadConstructionFormGet.orderStatus === '1' ? '已处理' :
+															cpCarloadConstructionFormGet.orderStatus === 2 || cpCarloadConstructionFormGet.orderStatus === '2' ? '关闭' : '')) : ''}
+												style={cpCarloadConstructionFormGet.orderStatus === 0 || cpCarloadConstructionFormGet.orderStatus === '0' ? { color: '#f50' } : (
+													cpCarloadConstructionFormGet.orderStatus === 1 || cpCarloadConstructionFormGet.orderStatus === '1' ? { color: '#87d068' } : { color: 'rgb(166, 156, 156)' }
+												)}
+											/>
+										</FormItem>
+									</Col>
+									{/* <Col lg={12} md={12} sm={24} >
+								<FormItem {...formItemLayout} label='业务意向单号'>
+									<Input value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.intentionId) ? cpCarloadConstructionFormGet.intentionId : ''} disabled />
+								</FormItem>
+							</Col> */}
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='单号'>
+											<Input value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.id) ? cpCarloadConstructionFormGet.id : ''} disabled />
+										</FormItem>
+									</Col>
+									<Col lg={24} md={24} sm={24} >
+										<FormItem {...formItemLayout} label='订单编号' >
+											<Input disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.orderCode) ? cpCarloadConstructionFormGet.orderCode : ''} />
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='订单分类'>
+											{getFieldDecorator('orderType', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.orderType) ? cpCarloadConstructionFormGet.orderType : '',    // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: false,
+														message: '请选择订单分类',
+													},
+												],
+											})(
+												<Select
+
+													style={{ width: '100%' }}
+													placeholder='请选择订单分类'
+													disabled
+												>
+													{
+														isNotBlank(this.state.orderType) && this.state.orderType.length > 0 && this.state.orderType.map(d => <Option key={d.id} value={d.value}>{d.label}</Option>)
+													}
+												</Select>
+											)}
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='业务项目'>
+											{getFieldDecorator('project', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.project) ? cpCarloadConstructionFormGet.project : '',    // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: false,
+														message: '请选择业务项目',
+													},
+												],
+											})(
+												<Select
+													allowClear
+													style={{ width: '100%' }}
+													placeholder='请选择业务项目'
+													disabled
+												>
+													{
+														isNotBlank(this.state.business_project) && this.state.business_project.length > 0 && this.state.business_project.map(d => <Option key={d.id} value={d.value}>{d.label}</Option>)
+													}
+												</Select>
+											)}
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='业务渠道'>
+											{getFieldDecorator('dicth', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.dicth) ? cpCarloadConstructionFormGet.dicth : '',    // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: false,
+														message: '请选择业务渠道',
+													},
+												],
+											})(
+												<Select
+													allowClear
+													style={{ width: '100%' }}
+													placeholder='请选择业务渠道'
+													disabled
+												>
+													{
+														isNotBlank(this.state.business_dicth) && this.state.business_dicth.length > 0 && this.state.business_dicth.map(d => <Option key={d.id} value={d.value}>{d.label}</Option>)
+													}
+												</Select>
+											)}
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='业务分类'>
+											{getFieldDecorator('businessType', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.businessType) ? cpCarloadConstructionFormGet.businessType : '',    // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: false,
+														message: '请选择业务分类',
+													},
+												],
+											})(
+												<Select
+													allowClear
+													style={{ width: '100%' }}
+													placeholder='请选择业务分类'
+													disabled
+												>
+													{
+														isNotBlank(this.state.business_type) && this.state.business_type.length > 0 && this.state.business_type.map(d => <Option key={d.id} value={d.value}>{d.label}</Option>)
+													}
+												</Select>
+											)}
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='品牌'>
+											<Select
+												style={{ width: '100%' }}
+												// placeholder='请选择结算类型'
+												disabled
+												allowClear
+												value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.brand) ? cpCarloadConstructionFormGet.brand : ''}
+											>
+												{
+													isNotBlank(this.state.brand) && this.state.brand.length > 0 && this.state.brand.map(d => <Option key={d.id} value={d.value}>{d.label}</Option>)
+												}
+											</Select>
+											{/* <Input disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.brand) ? cpCarloadConstructionFormGet.brand : ''} /> */}
+										</FormItem>
+									</Col>
+								</Row>
+							</Card>
+
+							<Card title="总成信息" style={{ marginTop: "20px" }} bordered={false}>
+								<Row gutter={12}>
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='进场类型'>
+											{/* <Input disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.assemblyEnterType) ? cpCarloadConstructionFormGet.assemblyEnterType : ''} /> */}
+
+											<Select
+												allowClear
+												disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.assemblyEnterType) ? cpCarloadConstructionFormGet.assemblyEnterType : ''}
+												style={{ width: '100%' }}
+											>
+												{
+													isNotBlank(this.state.approachType) && this.state.approachType.length > 0 && this.state.approachType.map(d => <Option key={d.id} value={d.value}>{d.label}</Option>)
+												}
+											</Select>
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='品牌'>
+											<Input disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.cpAssemblyBuild) ? cpCarloadConstructionFormGet.cpAssemblyBuild.assemblyBrand : ''} />
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='车型/排量'>
+											<Input disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.cpAssemblyBuild) ? cpCarloadConstructionFormGet.cpAssemblyBuild.vehicleModel : ''} />
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='年份'>
+											<Input disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.cpAssemblyBuild) ? cpCarloadConstructionFormGet.cpAssemblyBuild.assemblyYear : ''} />
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='总成型号'>
+											<Input disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.cpAssemblyBuild) ? cpCarloadConstructionFormGet.cpAssemblyBuild.assemblyModel : ''} />
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='钢印号'>
+											<Input disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.assemblySteelSeal) ? cpCarloadConstructionFormGet.assemblySteelSeal : ''} />
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='VIN码'>
+											<Input disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.assemblyVin) ? cpCarloadConstructionFormGet.assemblyVin : ''} />
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='其他识别信息'>
+											<Input disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.assemblyMessage) ? cpCarloadConstructionFormGet.assemblyMessage : ''} />
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='故障代码'>
+											<Input disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.assemblyFaultCode) ? cpCarloadConstructionFormGet.assemblyFaultCode : ''} />
+										</FormItem>
+									</Col>
+									<Col lg={24} md={24} sm={24}>
+										<FormItem {...formItemLayout} label='本次故障描述' >
+											{getFieldDecorator('assemblyErrorDescription', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.assemblyErrorDescription) ? cpCarloadConstructionFormGet.assemblyErrorDescription : '',     // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: false,   // 是否必填
+														message: '请输入本次故障描述',
+
+													},
+												],
+											})(<TextArea disabled />)}
+										</FormItem>
+									</Col>
+									<Col lg={24} md={24} sm={24}>
+										<FormItem {...formItemLayout} label="相片上传" className="allimgstyle">
+											{getFieldDecorator('photo', {
+												initialValue: ''
+												// : isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.photo) ? cpCarloadConstructionFormGet.photo : '',
+											})(
+												<Upload
+													disabled
+													accept="image/*"
+													onChange={this.handleUploadChange}
+													onRemove={this.handleRemove}
+													beforeUpload={this.handlebeforeUpload}
+													fileList={fileList}
+													listType="picture-card"
+													onPreview={this.handlePreview}
+												>
+													{/* {isNotBlank(fileList) && fileList.length >= 9 ? null : uploadButton} */}
+												</Upload>
+											)}
+										</FormItem>
+									</Col>
+								</Row>
+							</Card>
+
+							<Card title="业务员信息" className={styles.card} bordered={false}>
+								<Row gutter={16}>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='业务员'>
+											<Input
+												// style={{ width: '50%' }}
+												disabled
+												value={(isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.user) ? cpCarloadConstructionFormGet.user.name : '')}
+											/>
+											{/* <Button type="primary" style={{ marginLeft: '8px' }} onClick={this.onselect} loading={submitting} disabled>选择</Button> */}
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='编号'>
+											<Input
+												disabled
+												value={(isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.user) ? cpCarloadConstructionFormGet.user.no : '')}
+											/>
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='联系方式'>
+											<Input
+												disabled
+												value={(isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.user) ? cpCarloadConstructionFormGet.user.phone : '')}
+											/>
+										</FormItem>
+									</Col>
+									{/* <Col lg={12} md={12} sm={24}>
+								<FormItem {...formItemLayout} label='所属大区'>
+									<Input
+										disabled
+										value={(isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.user) && isNotBlank(cpCarloadConstructionFormGet.user.area) ? cpCarloadConstructionFormGet.user.area.name : '')}
+									/>
+								</FormItem>
+							</Col> */}
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='所属公司'>
+											<Input
+												disabled
+												value={(isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.user) && isNotBlank(cpCarloadConstructionFormGet.user.office) ? cpCarloadConstructionFormGet.user.office.name : '')}
+											/>
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='所属区域'>
+											<Select
+												allowClear
+												// mode="multiple"
+												notFoundContent={null}
+												style={{ width: '100%' }}
+												value={(isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.user) && isNotBlank(cpCarloadConstructionFormGet.user.dictArea) ? cpCarloadConstructionFormGet.user.dictArea : '')}
+												placeholder="请选择所属区域"
+												disabled
+											>
+												{
+													isNotBlank(this.state.area) && this.state.area.length > 0 && this.state.area.map(item =>
+														<Option value={item.value} key={item.value}>
+															{item.label}
+														</Option>
+													)
+												}
+											</Select>
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='所属部门'>
+											<Input
+												disabled
+												value={(isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.user) && isNotBlank(cpCarloadConstructionFormGet.user.dept) ? cpCarloadConstructionFormGet.user.dept.name : '')}
+											/>
+										</FormItem>
+
+									</Col>
+								</Row>
+							</Card>
+
+
+							<Card title="客户信息" style={{ marginTop: "20px" }} bordered={false}>
+								<Row gutter={12}>
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='客户'>
+											<Input disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.client) && isNotBlank(cpCarloadConstructionFormGet.client.user) && isNotBlank(cpCarloadConstructionFormGet.client.user.name) ? cpCarloadConstructionFormGet.client.user.name : ''} />
+										</FormItem>
+									</Col>
+
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label="客户公司">
+											<Input disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.client) && isNotBlank(cpCarloadConstructionFormGet.client.clientCpmpany) ? cpCarloadConstructionFormGet.client.clientCpmpany : ''} />
+										</FormItem>
+									</Col>
+
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='客户分类'>
+											<Input disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.client) && isNotBlank(cpCarloadConstructionFormGet.client.classify) ? cpCarloadConstructionFormGet.client.classify : ''} />
+										</FormItem>
+									</Col>
+
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='客户编号'>
+											<Input
+												disabled
+												value={(isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.client) ? cpCarloadConstructionFormGet.client.code : '')}
+											/>
+										</FormItem>
+									</Col>
+
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='联系人'>
+											<Input disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.client) && isNotBlank(cpCarloadConstructionFormGet.client.name) ? cpCarloadConstructionFormGet.client.name : ''} />
+										</FormItem>
+									</Col>
+
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='联系电话'>
+											<Input disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.client) && isNotBlank(cpCarloadConstructionFormGet.client.phone) ? cpCarloadConstructionFormGet.client.phone : ''} />
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='联系地址'>
+											<Input disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.client) && isNotBlank(cpCarloadConstructionFormGet.client.address) ? cpCarloadConstructionFormGet.client.address : ''} />
+										</FormItem>
+									</Col>
+								</Row>
+							</Card>
+
+							<Card title="一级信息" style={{ marginTop: "20px" }} bordered={false}>
+								<Row gutter={12}>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label="交货时间">
+											{getFieldDecorator('deliveryDate', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.deliveryDate) ? moment(cpCarloadConstructionFormGet.deliveryDate) : null,
+												rules: [
+													{
+														required: true,   // 是否必填
+														message: '请选择交货时间',
+													},
+												],
+											})(
+												<DatePicker
+													placeholder="请选择凭证日期"
+													format="YYYY-MM-DD"
+													style={{ width: '100%' }}
+													disabled
+												/>
+											)
+											}
+										</FormItem>
+									</Col>
+									{/* <Col lg={12} md={12} sm={24}>
+								<FormItem {...formItemLayout} label='付款方式'>
+									{getFieldDecorator('paymentMethod', {
+										initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.paymentMethod) ? cpCarloadConstructionFormGet.paymentMethod : '',    // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+										rules: [
+											{
+												required: false,
+												message: '请选择付款方式',
+											},
+										],
+									})(
+										<Select
+										disabled
+											allowClear
+											style={{ width: '100%' }}
+										>
+											{
+												isNotBlank(this.state.payment_methodd) && this.state.payment_methodd.length > 0 && this.state.payment_methodd.map(d => <Option key={d.id} value={d.value}>{d.label}</Option>)
+											}
+										</Select>
+									)}
+								</FormItem>
+							</Col> */}
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='旧件需求'>
+											{getFieldDecorator('oldNeed', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.oldNeed) ? cpCarloadConstructionFormGet.oldNeed : '',    // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: false,
+														message: '请选择旧件需求',
+													},
+												],
+											})(
+												<Select
+													allowClear
+													style={{ width: '100%' }}
+													disabled
+												>
+													{
+														isNotBlank(this.state.old_need) && this.state.old_need.length > 0 && this.state.old_need.map(d => <Option key={d.id} value={d.value}>{d.label}</Option>)
+													}
+												</Select>
+											)}
+										</FormItem>
+									</Col>
+									{/* <Col lg={12} md={12} sm={24}>
+								<FormItem {...formItemLayout} label='开票需求'>
+									{getFieldDecorator('makeNeed', {
+										initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.makeNeed) ? cpCarloadConstructionFormGet.makeNeed : '',     // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+										rules: [
+											{
+												required: false,   // 是否必填
+												message: '请输入开票需求',
+												
+											},
+										],
+									})(<Select
+										allowClear
+										style={{ width: '100%' }}
+										disabled
+									>
+										{
+											isNotBlank(this.state.make_need) && this.state.make_need.length > 0 && this.state.make_need.map(d => <Option key={d.id} value={d.value}>{d.label}</Option>)
+										}
+									</Select>)}
+								</FormItem>
+							</Col> */}
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='质保时间'>
+											<Select
+												allowClear
+												disabled
+												style={{ width: '50%' }}
+												value={`${this.state.selectyear} 年`}
+												onChange={this.editYear}
+											>
+												{
+													isNotBlank(yeardata) && yeardata.length > 0 && yeardata.map(d => <Option key={d.key} value={d.key}>{d.value}</Option>)
+												}
+											</Select>
+											<Select
+												allowClear
+												style={{ width: '50%' }}
+												disabled
+												value={`${this.state.selectmonth} 月`}
+												onChange={this.editMonth}
+											>
+												{
+													isNotBlank(monthdata) && monthdata.length > 0 && monthdata.map(d => <Option key={d.key} value={d.key}>{d.value}</Option>)
+												}
+											</Select>
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='质量要求'>
+											{getFieldDecorator('qualityNeed', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.qualityNeed) ? cpCarloadConstructionFormGet.qualityNeed : '',    // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: true,
+														message: '请选择质量要求',
+													},
+												],
+											})(
+												<Select
+													allowClear
+													style={{ width: '100%' }}
+													disabled
+												>
+													{
+														isNotBlank(this.state.quality_need) && this.state.quality_need.length > 0 && this.state.quality_need.map(d => <Option key={d.id} value={d.value}>{d.label}</Option>)
+													}
+												</Select>
+											)}
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='油品要求'>
+											{getFieldDecorator('oilsNeed', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.oilsNeed) ? cpCarloadConstructionFormGet.oilsNeed : '',    // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: false,
+														message: '请选择油品要求',
+													},
+												],
+											})(
+												<Select
+													allowClear
+													style={{ width: '100%' }}
+													disabled
+												>
+													{
+														isNotBlank(this.state.oils_need) && this.state.oils_need.length > 0 && this.state.oils_need.map(d => <Option key={d.id} value={d.value}>{d.label}</Option>)
+													}
+												</Select>
+											)}
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='外观要求'>
+											{getFieldDecorator('guiseNeed', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.guiseNeed) ? cpCarloadConstructionFormGet.guiseNeed : '',    // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: false,
+														message: '请选择外观要求',
+													},
+												],
+											})(
+												<Select
+													allowClear
+													style={{ width: '100%' }}
+													disabled
+												>
+													{
+														isNotBlank(this.state.guise_need) && this.state.guise_need.length > 0 && this.state.guise_need.map(d => <Option key={d.id} value={d.value}>{d.label}</Option>)
+													}
+												</Select>
+											)}
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='安装指导'>
+											{getFieldDecorator('installationGuide', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.installationGuide) ? cpCarloadConstructionFormGet.installationGuide : '',    // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: false,
+														message: '请选择安装指导',
+													},
+												],
+											})(
+												<Select
+													allowClear
+													style={{ width: '100%' }}
+													disabled
+												>
+													{
+														isNotBlank(this.state.installation_guide) && this.state.installation_guide.length > 0 && this.state.installation_guide.map(d => <Option key={d.id} value={d.value}>{d.label}</Option>)
+													}
+												</Select>
+											)}
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='物流要求'>
+											{getFieldDecorator('logisticsNeed', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.logisticsNeed) ? cpCarloadConstructionFormGet.logisticsNeed : '',     // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: true,   // 是否必填
+														message: '请输入物流要求',
+
+													},
+												],
+											})(<Select
+												allowClear
+												style={{ width: '100%' }}
+												disabled
+											>
+												{
+													isNotBlank(this.state.logisticsNeed) && this.state.logisticsNeed.length > 0 && this.state.logisticsNeed.map(d => <Option key={d.id} value={d.value}>{d.label}</Option>)
+												}
+											</Select>)}
+										</FormItem>
+									</Col>
+									<Col lg={24} md={24} sm={24}>
+										<FormItem {...formItemLayout} label='其他约定事项'  >
+											{getFieldDecorator('otherBuiness', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.otherBuiness) ? cpCarloadConstructionFormGet.otherBuiness : '',     // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: false,   // 是否必填
+														message: '请输入其他约定事项',
+
+													},
+												],
+											})(<TextArea placeholder='请输入其他约定事项' disabled />)}
+										</FormItem>
+									</Col>
+								</Row>
+							</Card>
+
+							<Card title="其他信息" style={{ marginTop: "20px" }} bordered={false}>
+
+								<Row gutter={12}>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='继续施工'>
+											{getFieldDecorator('isGo', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.isGo) ? cpCarloadConstructionFormGet.isGo : '1',    // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: true,
+														message: '请选择继续施工',
+													},
+												],
+											})(
+												<Select
+													allowClear
+													style={{ width: '100%' }}
+													placeholder='请选择继续施工'
+													disabled
+												>
+													<Option key='否' value='0'>否</Option>
+													<Option key='是' value='1'>是</Option>
+												</Select>
+											)}
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='维修项目'>
+											<Input disabled value={isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.maintenanceProject) ? cpCarloadConstructionFormGet.maintenanceProject : ''} />
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='行程里程'>
+											{getFieldDecorator('tripMileage', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.tripMileage) ? cpCarloadConstructionFormGet.tripMileage : '',     // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: false,   // 是否必填
+														message: '请输入行程里程',
+													},
+												],
+											})(<InputNumber disabled precision={2} style={{ width: '100%' }} />)}
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='车牌号'>
+											{getFieldDecorator('plateNumber', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.plateNumber) ? cpCarloadConstructionFormGet.plateNumber : '',     // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: false,   // 是否必填
+														message: '请输入车牌号',
+
+													},
+												],
+											})(<Input disabled />)}
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24}>
+										<FormItem {...formItemLayout} label='是否拍照'>
+											{getFieldDecorator('isPhotograph', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.isPhotograph) ? cpCarloadConstructionFormGet.isPhotograph : '',    // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: false,
+														message: '请选择是否拍照',
+													},
+												],
+											})(
+												<Select
+													allowClear
+													style={{ width: '100%' }}
+													disabled
+												>
+													{
+														isNotBlank(this.state.is_photograph) && this.state.is_photograph.length > 0 && this.state.is_photograph.map(d => <Option key={d.id} value={d.value}>{d.label}</Option>)
+													}
+												</Select>
+											)}
+										</FormItem>
+									</Col>
+									{/* <Col lg={12} md={12} sm={24}>
+								<FormItem {...formItemLayout} label='定损员'>
+									{getFieldDecorator('partFee', {
+										initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.partFee) ? cpCarloadConstructionFormGet.partFee : '',     // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+										rules: [
+											{
+												required: false,   // 是否必填
+												message: '请输入定损员',
+												
+											},
+										],
+									})(<Input disabled />)}
+								</FormItem>
+							</Col>
+							<Col lg={12} md={12} sm={24}>
+								<FormItem {...formItemLayout} label='事故单号'>
+									{getFieldDecorator('accidentNumber', {
+										initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.accidentNumber) ? cpCarloadConstructionFormGet.accidentNumber : '',     // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+										rules: [
+											{
+												required: false,   // 是否必填
+												message: '请输入事故单号',
+												
+											},
+										],
+									})(<Input disabled />)}
+								</FormItem>
+							</Col> */}
+									<Col lg={24} md={24} sm={24}>
+										<FormItem {...formItemLayout} label='发货地址' >
+											{getFieldDecorator('shipAddress', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.shipAddress) ? cpCarloadConstructionFormGet.shipAddress : '',     // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: false,   // 是否必填
+														message: '请输入发货地址',
+
+													},
+												],
+											})(<TextArea disabled />)}
+										</FormItem>
+									</Col>
+									<Col lg={24} md={24} sm={24}>
+										<FormItem {...formItemLayout} label='维修历史' >
+											{getFieldDecorator('maintenanceHistory', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.maintenanceHistory) ? cpCarloadConstructionFormGet.maintenanceHistory : '',     // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: true,   // 是否必填
+														message: '请输入维修历史',
+
+													},
+												],
+											})(<TextArea disabled />)}
+										</FormItem>
+									</Col>
+									{/* <Col lg={24} md={24} sm={24}>
+								<FormItem {...formItemLayout} label='事故说明' >
+									{getFieldDecorator('accidentExplain', {
+										initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.accidentExplain) ? cpCarloadConstructionFormGet.accidentExplain : '',     // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+										rules: [
+											{
+												required: false,   // 是否必填
+												message: '请输入事故说明',
+												
+											},
+										],
+									})(<TextArea placeholder='请输入事故说明' disabled />)}
+								</FormItem>
+							</Col> */}
+								</Row>
+							</Card>
+							<Card title="整车信息" style={{ marginTop: "20px" }} bordered={false}>
+								<Row gutter={12}>
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='整车检测结果'>
+											{getFieldDecorator('carloadTestingResult', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.carloadTestingResult) ? cpCarloadConstructionFormGet.carloadTestingResult : '',     // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: false,   // 是否必填
+														message: '请输入整车检测结果',
+
+													},
+												],
+											})(<Input placeholder='请输入整车检测结果' disabled />)}
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='整车故障编码'>
+											{getFieldDecorator('carloadFaultCode', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.carloadFaultCode) ? cpCarloadConstructionFormGet.carloadFaultCode : '',     // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: false,   // 是否必填
+														message: '请输入整车故障编码',
+
+													},
+												],
+											})(<Input placeholder='请输入整车故障编码' disabled />)}
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24} >
+										<FormItem {...formItemLayout} label='检测人'>
+											{getFieldDecorator('testingUser', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.testingUser) ? cpCarloadConstructionFormGet.testingUser : '',     // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: false,   // 是否必填
+														message: '请输入检测人',
+
+													},
+												],
+											})(<Input placeholder='请输入检测人' disabled />)}
+										</FormItem>
+									</Col>
+									<Col lg={12} md={12} sm={24} >
+										{/* <FormItem {...formItemLayout} label='维修班组'>
+									{getFieldDecorator('maintenanceCrew', {
+										initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.maintenanceCrew) ? cpCarloadConstructionFormGet.maintenanceCrew : '',     // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+										rules: [
+											{
+												required: true,   // 是否必填
+												message: '请输入维修班组',
+												
+											},
+										],
+									})(<Input placeholder='请输入维修班组' disabled/>)} */}
+										<FormItem {...formItemLayout} label='维修班组'>
+											<Input
+												style={{ width: '50%' }}
+												disabled
+												value={isNotBlank(selectdata) && isNotBlank(selectdata.name) ?
+													selectdata.name : (isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.maintenanceCrew) ? cpCarloadConstructionFormGet.maintenanceCrew.name : '')}
+											/>
+											<Button type="primary" style={{ marginLeft: '8px' }} onClick={this.onselect} loading={submitting} disabled>选择</Button>
+										</FormItem>
+									</Col>
+									<Col lg={24} md={24} sm={24}>
+										<FormItem {...formItemLayout} label="相片上传" className="allimgstyle">
+											{getFieldDecorator('photo2', {
+												initialValue: ''
+												// : isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.photo) ? cpCarloadConstructionFormGet.photo : '',
+											})(
+												<Upload
+													// disabled
+													accept="image/*"
+													onChange={this.handleUploadChange1}
+													onRemove={this.handleRemove1}
+													beforeUpload={this.handlebeforeUpload1}
+													fileList={fileList1}
+													listType="picture-card"
+													onPreview={this.handlePreview1}
+													disabled
+												>
+													{isNotBlank(fileList) && fileList.length >= 9 || (orderflag) ? null : uploadButton}
+												</Upload>
+											)}
+										</FormItem>
+									</Col>
+									<Col lg={24} md={24} sm={24} >
+										<FormItem {...formItemLayout} label="备注信息" >
+											{getFieldDecorator('remarks', {
+												initialValue: isNotBlank(cpCarloadConstructionFormGet) && isNotBlank(cpCarloadConstructionFormGet.remarks) ? cpCarloadConstructionFormGet.remarks : '',     // 默认值  此参数必须 如无默认值的话根据组件来实行空默认值  否则会出现undefined的问题
+												rules: [
+													{
+														required: false,
+														message: '请输入备注信息',
+													},
+												],
+											})(
+												<TextArea
+													disabled
+													style={{ minHeight: 32 }}
+													placeholder='请输入备注信息'
+													rows={2}
+												/>
+											)}
+										</FormItem>
+									</Col>
+								</Row>
+							</Card>
+	<FormItem {...submitFormLayout} style={{ marginTop: 32, textAlign: 'center' }}>
+
+								<Button style={{ marginLeft: 8 }} onClick={() => this.postwg(cpCarloadConstructionFormGet.id)}>
+									报工
+							</Button>
+
+</FormItem>
+							</span>
+						}
+	

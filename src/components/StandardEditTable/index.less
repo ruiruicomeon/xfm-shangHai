@@ -1,0 +1,33 @@
+@import '~antd/lib/style/themes/default.less';
+
+.standardTable {
+  :global {
+    .ant-table-pagination {
+      margin-top: 24px;
+    }
+    .react-resizable {
+      position: relative;
+      background-clip: padding-box;
+    }
+    
+    .react-resizable-handle {
+      position: absolute;
+      width: 10px;
+      height: 100%;
+      bottom: 0;
+      right: -5px;
+      cursor: col-resize;
+      z-index: 1;
+    }
+  }
+
+  .tableAlert {
+    // margin-bottom: 16px;
+  }
+
+  .tableRow {
+    &:nth-child(even) {
+      background-color: #fafafa;
+    }
+  }
+}

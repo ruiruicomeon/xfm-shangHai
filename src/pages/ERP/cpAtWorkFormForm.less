@@ -1,0 +1,105 @@
+@import '~antd/lib/style/themes/default.less';
+.card {
+  margin-bottom: 24px;
+}
+.heading {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  line-height: 22px;
+}
+.steps:global(.ant-steps) {
+  max-width: 750px;
+  margin: 16px auto;
+}
+.errorIcon {
+  margin-right: 24px;
+  color: @error-color;
+  cursor: pointer;
+  i {
+    margin-right: 4px;
+  }
+}
+.errorPopover {
+  :global {
+    .ant-popover-inner-content {
+      min-width: 256px;
+      max-height: 290px;
+      padding: 0;
+      overflow: auto;
+    }
+  }
+}
+.errorListItem {
+  padding: 8px 16px;
+  list-style: none;
+  border-bottom: 1px solid @border-color-split;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover {
+    background: @primary-1;
+  }
+  &:last-child {
+    border: 0;
+  }
+  .errorIcon {
+    float: left;
+    margin-top: 4px;
+    margin-right: 12px;
+    padding-bottom: 22px;
+    color: @error-color;
+  }
+  .errorField {
+    margin-top: 2px;
+    color: @text-color-secondary;
+    font-size: 12px;
+  }
+}
+.editable {
+  td {
+    padding-top: 13px !important;
+    padding-bottom: 12.5px !important;
+  }
+}
+.advancedForm + div {
+  padding-bottom: 64px;
+}
+.advancedForm {
+  :global {
+    .ant-form .ant-row:last-child .ant-form-item {
+      margin-bottom: 24px;
+    }
+    .ant-table td {
+      transition: none !important;
+    }
+  }
+}
+.optional {
+  color: @text-color-secondary;
+  font-style: normal;
+}
+:global(.ant-select-selection){
+  -webkit-user-select: text !important;
+-khtml-user-select: text !important;
+-moz-user-select: text !important;
+-ms-user-select: text !important;
+ user-select: text !important;
+}
+:global(.ant-input[disabled]){
+  color:rgba(0, 0, 0, 0.65)
+}
+:global(.ant-input-number-disabled){
+  color:rgba(0, 0, 0, 0.65)
+}
+:global(.allinputstyle .ant-form-item-label){
+  width:14.55%
+}
+:global(.allinputstyle .ant-input){
+width:170.9%;
+max-width:170.9%;
+}
+:global(.allimgstyle .ant-form-item-label){
+width:14.55%
+}
+:global(.allimgstyle .ant-form-item-control-wrapper){
+width:71.2%;
+}
